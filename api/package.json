@@ -1,0 +1,28 @@
+{
+  "name": "framefeed",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "tsc -w",
+    "lint": "tslint '*.ts'",
+    "deploy-dev": "rm -rf node_modules/sharp && SHARP_IGNORE_GLOBAL_LIBVIPS=1 npm install --arch=x64 --platform=linux sharp && sls deploy --stage dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/aws-sdk": "^2.7.0",
+    "@types/lodash": "^4.14.132",
+    "@types/node": "^7.0.5",
+    "jsonfile": "^5.0.0",
+    "serverless-offline": "^4.10.6",
+    "serverless-plugin-typescript": "^1.1.7"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.796.0",
+    "sharp": "^0.26.3",
+    "uuid": "^3.1.0"
+  }
+}

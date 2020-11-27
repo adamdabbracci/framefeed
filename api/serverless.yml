@@ -1,0 +1,54 @@
+service: framefeed
+
+frameworkVersion: ">=1.1.0 <2.0.0"
+
+plugins:
+  - serverless-offline
+
+custom:
+  s3UploadBucketName: framefeed-upload-${opt:stage, self:provider.stage}
+
+provider:
+  name: aws
+  profile: adamdabbracci
+  runtime: nodejs12.x
+  environment:
+    ENV: ${opt:stage, self:provider.stage}
+    UPLOAD_BUCKET: ${self:custom.s3UploadBucketName}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:*
+      Resource: "*"
+
+functions:
+  getUsers:
+    handler: functions.getUsers
+    events:
+        - http:
+            path: /users
+            method: get
+            cors: true
+
+  getFeed:
+    handler: functions.getFeed
+    events:
+        - http:
+            path: /{userId}/feed
+            method: get
+            cors: true
+
+  getUploadUrl:
+    handler: functions.getUploadUrl
+    events:
+        - http:
+            path: upload/get-url
+            method: post
+            cors: true
+  resize:
+      handler: functions.resize
+      events:
+        - s3: 
+            bucket: ${self:custom.s3UploadBucketName}
+            rules:
+              - suffix: .png
