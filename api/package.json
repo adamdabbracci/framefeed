@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "tsc -w",
     "lint": "tslint '*.ts'",
-    "deploy-dev": "rm -rf node_modules/sharp && SHARP_IGNORE_GLOBAL_LIBVIPS=1 npm install --arch=x64 --platform=linux sharp && sls deploy --stage dev"
+    "deploy-dev": "rm -rf node_modules/sharp && SHARP_IGNORE_GLOBAL_LIBVIPS=1 npm install --arch=x64 --platform=linux sharp && sls deploy --stage dev && rm -rf node_modules/sharp && npm install"
   },
   "keywords": [],
   "author": "",

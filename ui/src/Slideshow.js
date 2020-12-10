@@ -16,6 +16,11 @@ export class Slideshow extends React.Component {
     noSleep = new NoSleep();
 
     componentDidMount() {
+
+        this.setState({
+            showFeed: false,
+        })
+
         document.addEventListener("fullscreenchange", (e) => {
             if (!document.fullscreenElement) {
                 this.setState({
@@ -48,11 +53,17 @@ export class Slideshow extends React.Component {
 
   render() {
     const { showFeed } = this.state
-    const { feed } = this.props
+    const { feed, loadFeed } = this.props
 
     if (!feed) {
         return (
-            <div>Loading...</div>
+            <div style={{
+                fontSize: "1.2 rem",
+                fontWeight: "bold",
+                margin: "10% auto",
+                display: "block",
+                textAlign: "center"
+            }}>Loading your notes...</div>
         )
     }
 
@@ -150,6 +161,15 @@ export class Slideshow extends React.Component {
                         </CarouselProvider>
                     )
                 }
+                <button style={{
+                    zIndex: 10,
+                    position: "absolute",
+                    bottom: 1,
+                    right: 1,
+                }} onClick={() => {
+                    loadFeed()
+                    this.startSlideshow()
+                }}>⟳</button>
             </div>
            
         )

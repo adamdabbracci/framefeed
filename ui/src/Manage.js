@@ -7,7 +7,9 @@ export class Manage extends React.Component {
         selectedFile: null,
         previewUrl: null,
         selectedUsers: [],
+        caption: null,
         users: null,
+        uploading: false,
 
       }; 
 
@@ -27,6 +29,10 @@ export class Manage extends React.Component {
       // On file upload (click the upload button) 
       onFileUpload = async () => { 
 
+        this.setState({
+          uploading: true,
+        })
+
         const { selectedUsers } = this.state
        
         // Create an object of formData 
@@ -41,9 +47,15 @@ export class Manage extends React.Component {
        
        
         try {
-            const result = await uploadFile(this.props.userId, selectedUsers, this.state.selectedFile)
+            const result = await uploadFile(this.props.userId, selectedUsers, this.state.selectedFile, this.state.caption)
             if (result) {
               alert("Uploaded successfully.")
+              this.setState({
+                uploading: false,
+                selectedFile: null,
+                selectedUsers: [],
+                caption: null,
+              })
             }
             
         }
@@ -73,9 +85,13 @@ export class Manage extends React.Component {
             padding: "20px"
           }}>
             
-              <div> 
+              <div style={{
+                width: "50%",
+                float: "left"
+
+              }}> 
                 <h3> 
-                    1. Select an image or video
+                    1. Select an image or video 
                 </h3> 
                 <div> 
                     <input type="file" onChange={this.onFileChange}  style={{
@@ -83,16 +99,22 @@ export class Manage extends React.Component {
                       padding: "20px",
                       width: "100%",
                     }}/> 
-                    {
-                  previewUrl && (
-                      <img src={previewUrl} style={{
-                        width: "50%",
-                        padding: "20px"
-                      }}></img>
-                  )
-                }
+                  
                 </div> 
-                <h3>2. Select who you want to share with</h3>
+                <h3> 
+                    2. Add a caption
+                </h3>
+                <div>
+                  <input type="text" maxLength="30" placeholder="30 characters max" style={{
+                    width: "100%"
+                  }} onChange={(e) => {
+                    this.setState({
+                      caption: e.target.value
+                    })
+
+                  }}></input>
+                </div>
+                <h3>3. Select who you want to share with</h3>
                 
                 {/* {
                     users && (
@@ -138,7 +160,7 @@ export class Manage extends React.Component {
                                     selectedUsers
                                   })
 
-                                }}/> {users[userId]}
+                                }}/> {users[userId].name}
                               </label>
 
 
@@ -156,16 +178,42 @@ export class Manage extends React.Component {
                     )
                 }
 
-                <h3>3. Click to share this post!</h3>
+                <h3>4. Click to share!</h3>
                 <div>
                     <button className={"pure-button pure-button-primary"} style={{
                       fontSize: "2rem"
-                    }} onClick={this.onFileUpload}> 
-                            Share Post
+                    }} 
+                      onClick={this.onFileUpload}
+                      disabled={!this.state.selectedUsers || this.state.selectedUsers.length === 0 || !this.state.selectedFile || this.state.uploading}
+                      > 
+                            {
+                              !this.state.uploading && (
+                                <span>Share This Note</span>
+                              )
+                            }
+                            {
+                              this.state.uploading && (
+                                <span>Uploading, please wait...</span>
+                              )
+                            }
                     </button> 
                 </div>
                 
-            </div> 
+            </div>
+            <div style={{
+                  width: "40%",
+                  display: "inline-block"
+                }}>
+                  {
+                  previewUrl && (
+                      <img src={previewUrl} style={{
+                        float: "right",
+                        width: "90%",
+                        margin: "20px"
+                      }}></img>
+                  )
+                }
+                </div> 
           </div>
         ); 
       } 

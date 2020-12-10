@@ -1,7 +1,7 @@
 // const apiUrl = "http://localhost:3000"
 const apiUrl = "https://tx6vmubqee.execute-api.us-east-1.amazonaws.com/dev"
 
-export async function uploadFile(sourceUserId, targetUserIds, selectedFile) {
+export async function uploadFile(sourceUserId, targetUserIds, selectedFile, caption) {
 
     let uploadUrl = null
 
@@ -15,7 +15,7 @@ export async function uploadFile(sourceUserId, targetUserIds, selectedFile) {
                 userId: sourceUserId,
                 targetUserIds,
                 fileType: selectedFile.type,
-                caption: "test caption"
+                caption,
             })
         })
     

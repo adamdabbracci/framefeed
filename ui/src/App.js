@@ -5,7 +5,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
 } from "react-router-dom";
 import { Manage } from './Manage';
 import Login from './Login';
@@ -31,7 +31,7 @@ class App extends React.Component {
     }
     else {
       this.setState({
-        userName: users[userId],
+        userName: users[userId].name,
         userId,
       })
     }
@@ -39,21 +39,32 @@ class App extends React.Component {
   }
 
   loadFeed = async () => {
-    if (!this.state.feed && this.state.userId) {
+    if (this.state.userId) {
       const result = await getFeed(this.state.userId)
       this.setState({
           feed: result
       })
     }
+    else {
+      setTimeout(() => {
+        this.loadFeed()
+      }, 100)
+    }
     
   }
 
-  componentDidUpdate() {
-    this.loadFeed()
+  // componentDidUpdate() {
+  //   this.loadFeed()
+  // }
 
+  componentDidMount() {
     setInterval(() => {
       this.loadFeed()
     }, 30000)
+
+    setTimeout(() => {
+      this.loadFeed()
+    }, 0)
   }
 
 
@@ -68,7 +79,7 @@ class App extends React.Component {
                     <a className="pure-menu-heading" href="">Hello, <b>{this.state.userName}!</b></a>
 
                     <ul className="pure-menu-list">
-                        <li className="pure-menu-item pure-menu-selected"><Link to="/" className="pure-menu-link">Home</Link></li>
+                        <li className="pure-menu-item"><Link to="/" className="pure-menu-link">Slideshow</Link></li>
                         <li className="pure-menu-item"><Link to="/manage" className="pure-menu-link">Send A Note</Link></li>
                         <li className="pure-menu-item"><a href="#" className="pure-menu-link" onClick={() => {
                           this.setState({
@@ -77,7 +88,6 @@ class App extends React.Component {
                           })
                           window.localStorage.clear()
                         }}>Sign Out</a></li>
-                        <li className="pure-menu-item">Refresh rate: {refreshSpeed}</li>
                     </ul>
                 </div>
             </div>
@@ -91,7 +101,7 @@ class App extends React.Component {
                 <Manage userId={this.state.userId}></Manage>
               </Route>
               <Route path="/">
-                <Slideshow id="carousel" userId={this.state.userId} feed={this.state.feed}></Slideshow>
+                <Slideshow id="carousel" userId={this.state.userId} feed={this.state.feed} loadFeed={this.loadFeed}></Slideshow>
               </Route>
             </Switch>
           </div>

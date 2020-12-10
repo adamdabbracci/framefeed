@@ -8,9 +8,15 @@ const s3 = new AWS.S3({
 });
 
 let users = {
-  "7777": "Courtney and AJ",
-  "1289": "Armand and Anne",
-  "4567": "Meems and Gary"
+  "7777": {
+    name: "Courtney and AJ",
+  },
+  "1289": {
+    name: "Armand and Anne",
+  },
+  "4567": {
+    name: "Meems and Gary",
+  }
 }
 
 async function asyncForEach(array, callback) {
@@ -52,7 +58,7 @@ async function updateUserFeed(targetUserId, uploaderUserId, path, caption) {
   manifest.items.unshift({
     path,
     caption,
-    uploader: users[uploaderUserId],
+    uploader: users[uploaderUserId].name,
   })
   
   // Write the new manifest
@@ -119,10 +125,11 @@ module.exports.resize = async (event, context) => {
     catch(ex) {
       console.log("Failed to resize:")
       console.log(ex)
+      return
     }
 
 
-    return "OK"
+    return
 };
 
 module.exports.getUploadUrl = async (event, context) => {
