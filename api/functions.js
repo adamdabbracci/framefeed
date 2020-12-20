@@ -108,11 +108,12 @@ module.exports.resize = async (event, context) => {
 
       const bufferedOutput = await sharp(data.Body)
         .rotate()
+        .resize(1920, 1200)
         .toBuffer()
       
         const destparams = {
           Bucket: process.env.UPLOAD_BUCKET,
-          Key: `output/${path}`,
+          Key: `output/${path.replace('input/', '')}`,
           Body: bufferedOutput,
           ContentType: "image"
       };
@@ -156,7 +157,7 @@ module.exports.getUploadUrl = async (event, context) => {
 
     // Create the presigned URL
     const s3Params = {
-      Key:  sourcePath,
+      Key:  `input/${sourcePath}`,
       Expires: 120,
       ContentType: fileType,
       ACL: "public-read",
@@ -225,14 +226,15 @@ module.exports.getFeed = async (event, context) => {
     manifest = JSON.parse(manifestResponse.Body.toString())
   }
   catch(ex) {
-    console.log("Failed to get manifst for user: " + userId)
+    console.log("Failed to get manifest for user: " + userId)
     console.log(ex)
   }
 
   const postProcessing = manifest.items.map((x) => {
+    const path = x.path.replace(`input/`)
     return {
       ...x,
-      url: `https://${process.env.UPLOAD_BUCKET}.s3.amazonaws.com/output/${x.path}`
+      url: `https://${process.env.UPLOAD_BUCKET}.s3.amazonaws.com/output/${path}`
     }
   })
 

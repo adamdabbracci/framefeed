@@ -51,4 +51,5 @@ functions:
         - s3: 
             bucket: ${self:custom.s3UploadBucketName}
             rules:
+              - prefix: input/
               - suffix: .png

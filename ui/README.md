@@ -5,7 +5,7 @@
 `npm run deploy-dev` to deploy the API
 
 TODO:
-- Better photo cropping for super wide photos
+x Better photo cropping for super wide photos
 - Cloudfront
 - Video support
 - Speech-to-text

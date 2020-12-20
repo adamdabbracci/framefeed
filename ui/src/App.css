@@ -1,7 +1,9 @@
 .carousel {
     background-color: black;
 }
-
+#carousel {
+    cursor: none;
+}
 /*!
 Pure v2.0.3
 Copyright 2013 Yahoo!
