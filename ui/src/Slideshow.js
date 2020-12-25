@@ -3,7 +3,7 @@ import { CarouselProvider, Slider, Slide } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import { getFeed } from './api';
 
-const refreshInterval = 43200000 // 12 hours
+const refreshInterval = 60000 // 12 hours
 // refreshInterval = 1740000 // 29 minutes
 // const refreshInterval = 15000
 let refreshTimerInstance;
@@ -14,7 +14,8 @@ export class Slideshow extends React.Component {
         super()
         this.state = {
             showFeed: false,
-            feed: null
+            feed: null,
+            asSlideshow: false,
         }
     }
 
@@ -55,9 +56,10 @@ export class Slideshow extends React.Component {
         return
     }
 
-    startSlideshow = () => {
+    startSlideshow = (asSlideshow) => {
         this.setState({
           showFeed: true,
+          asSlideshow,
         })
     
         setTimeout(() => {
@@ -71,7 +73,7 @@ export class Slideshow extends React.Component {
       }
 
     render() {
-        const { feed, showFeed } = this.state
+        const { feed, showFeed, asSlideshow } = this.state
 
         if (!feed && !showFeed) {
             return (
@@ -93,8 +95,14 @@ export class Slideshow extends React.Component {
                     fontSize: "2rem"
                   }}>
                 <button class="pure-button pure-button-primary" onClick={() => {
-                    this.startSlideshow()
-                }}>Start Slideshow</button>
+                    this.startSlideshow(true)
+                }}>Start A Slideshow</button>
+
+                <button class="pure-button pure-button-primary" style={{
+                    marginLeft: "10px",
+                }} onClick={() => {
+                    this.startSlideshow(false)
+                }}>Flip Through Photos</button>
                   </div>
                 
             )
@@ -108,9 +116,9 @@ export class Slideshow extends React.Component {
                     naturalSlideWidth={window.innerWidth}
                     totalSlides={feed.length}
                     infinite={true}
-                    dragEnabled={false}
-                    touchEnabled={false}
-                    isPlaying={true}
+                    dragEnabled={!asSlideshow}
+                    touchEnabled={!asSlideshow}
+                    isPlaying={asSlideshow}
                     interval={15000}
                     id="carousel"
                 >
