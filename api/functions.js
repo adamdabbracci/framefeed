@@ -69,10 +69,15 @@ async function updateUserFeed(targetUserId, uploaderUserId, path, caption) {
   
   // Write the new manifest
   console.log(`Writing new manifest for user ${targetUserId}`)
-  console.log(manifest)
 
+  await writeManifest(targetUserId, manifest)
+
+  return manifest
+}
+
+async function writeManifest(targetUserId, manifest) {
   try {
-    const manifestResponse = await s3.putObject({
+    return s3.putObject({
         Bucket: process.env.UPLOAD_BUCKET,
         Key: `${targetUserId}/manifest.json`,
         Body: JSON.stringify(manifest)
@@ -83,8 +88,7 @@ async function updateUserFeed(targetUserId, uploaderUserId, path, caption) {
     console.log("ERROR: Failed to create new manifest:")
     console.log(ex)
   }
-
-  return manifest
+  
 }
 
 module.exports.getUsers = async (event, context) => {
@@ -215,8 +219,6 @@ module.exports.getUploadUrl = async (event, context) => {
     }
 };
 
-
-
 module.exports.getFeed = async (event, context) => {
   const userId = event.pathParameters.userId
   let manifest = {
@@ -253,5 +255,47 @@ module.exports.getFeed = async (event, context) => {
     },
     body: JSON.stringify(postProcessing)
   };
+};
+
+module.exports.removeItemFromFeed = async (event, context) => {
+  const userId = event.pathParameters.userId
+  const path = JSON.parse(event.body).path
+
+  const manifestResponse = await s3.getObject({
+      Bucket: process.env.UPLOAD_BUCKET,
+      Key: `${userId}/manifest.json`
+  }).promise()
+
+  manifest = JSON.parse(manifestResponse.Body.toString())
+
+  // Find the item
+  const itemIndex = manifest.items.findIndex(x => x.path === path)
+
+  if (itemIndex === -1) {
+    return {
+      statusCode: 404,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
+      },
+      body: JSON.stringify({
+        message: "Failed to find item with path " + path
+      })
+    }
+  }
+
+
+  manifest.items.splice(itemIndex, 1)
+
+  await writeManifest(userId, manifest)
+
+  return {
+    statusCode: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': true,
+    },
+    body: JSON.stringify(manifest)
+  }
 }
 

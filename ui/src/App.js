@@ -7,10 +7,9 @@ import {
   Route,
   Link,
 } from "react-router-dom";
-import { Manage } from './Manage';
+import { Create } from './Create';
 import Login from './Login';
-import NoSleep from 'nosleep.js';
-const noSleep = new NoSleep();
+import { ManageFeed } from './ManageFeed';
 
 
 
@@ -20,7 +19,7 @@ class App extends React.Component {
     super()
     this.state = {
       userId: null,
-      userName: "----",
+      userName: window.localStorage.getItem("userName") || "--",
     }
   }
 
@@ -30,13 +29,10 @@ class App extends React.Component {
 
   componentDidMount() {
     // Run immediately
-    setTimeout(() => {
-      this.setState({
-        userName: window.localStorage.getItem("userName"),
-        userId: window.localStorage.getItem("userId"),
-      })
-    }, 100);
-
+    this.setState({
+      userName: window.localStorage.getItem("userName"),
+      userId: window.localStorage.getItem("userId"),
+    })
   }
 
   
@@ -56,7 +52,8 @@ class App extends React.Component {
 
                   <ul className="pure-menu-list">
                     <li className="pure-menu-item"><Link to="/" className="pure-menu-link">Slideshow</Link></li>
-                    <li className="pure-menu-item"><Link to="/manage" className="pure-menu-link">Send A Note</Link></li>
+                    <li className="pure-menu-item"><Link to="/create" className="pure-menu-link">Send A Note</Link></li>
+                    <li className="pure-menu-item"><Link to="/manage" className="pure-menu-link">Edit Feed</Link></li>
                     <li className="pure-menu-item"><a href="#" className="pure-menu-link" onClick={() => {
                       this.setState({
                         userId: null,
@@ -73,8 +70,11 @@ class App extends React.Component {
             {/* A <Switch> looks through its children <Route>s and
                 renders the first one that matches the current URL. */}
             <Switch>
+              <Route path="/create">
+                <Create userId={this.state.userId}></Create>
+              </Route>
               <Route path="/manage">
-                <Manage userId={this.state.userId}></Manage>
+                <ManageFeed userId={this.state.userId}></ManageFeed>
               </Route>
               <Route path="/">
                 <Slideshow userId={this.state.userId}></Slideshow>
@@ -109,9 +109,10 @@ class App extends React.Component {
     }
     else {
       return (
-        <Login onLogin={(userId) => {
+        <Login onLogin={(userId, userName) => {
           this.setState({
             userId: userId,
+            userName,
           })
           // this.loadFeed()
         }}></Login>

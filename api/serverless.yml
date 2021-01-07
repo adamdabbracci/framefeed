@@ -37,6 +37,13 @@ functions:
             path: /{userId}/feed
             method: get
             cors: true
+  removeItemFromFeed:
+    handler: functions.removeItemFromFeed
+    events:
+        - http:
+            path: /{userId}/feed
+            method: delete
+            cors: true
 
   getUploadUrl:
     handler: functions.getUploadUrl
@@ -45,8 +52,10 @@ functions:
             path: upload/get-url
             method: post
             cors: true
+  
   resize:
       handler: functions.resize
+      timeout: 180
       events:
         - s3: 
             bucket: ${self:custom.s3UploadBucketName}

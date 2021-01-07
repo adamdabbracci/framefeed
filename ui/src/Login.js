@@ -29,7 +29,7 @@ export default class Login extends React.Component {
         else {
             window.localStorage.setItem("userId", this.state.userId)
             window.localStorage.setItem("userName", users[this.state.userId].name)
-            this.props.onLogin(this.state.userId)
+            this.props.onLogin(this.state.userId, users[this.state.userId].name)
         }
         
         

@@ -5,8 +5,10 @@
 `npm run deploy-dev` to deploy the API
 
 TODO:
-x Better photo cropping for super wide photos
-- Cloudfront
-- Video support
-- Speech-to-text
-- Friend list to limit who you can see
+[-] Better cropping/aligning for different photos
+[-] Store and display date
+[x] Manage photos on your feed
+[-] Cloudfront or save locally to device
+[-] Video support
+[-] Speech-to-text from video
+[-] Friend list to limit who you can see

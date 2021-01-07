@@ -30,7 +30,7 @@ export async function uploadFile(sourceUserId, targetUserIds, selectedFile, capt
     console.log(`Got Upload URL`, uploadUrl)
 
     if (!uploadUrl) {
-        alert("No upload URL returned, please try again.")
+        alert("No upload URL returned, please refresh the page and try again.")
         console.log(uploadUrl)
         return null
     }
@@ -65,5 +65,15 @@ export async function getFeed(userId) {
 
 export async function getUsers() {
     return fetch(`${apiUrl}/users`)
+    .then(response => response.json())
+}
+
+export async function removeFeedItem(userId, photoPath) {
+    return fetch(`${apiUrl}/${userId}/feed`, {
+        method: "DELETE",
+        body: JSON.stringify({
+            path: photoPath
+        })
+    })
     .then(response => response.json())
 }
