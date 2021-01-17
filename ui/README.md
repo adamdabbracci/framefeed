@@ -5,10 +5,14 @@
 `npm run deploy-dev` to deploy the API
 
 TODO:
-[-] Better cropping/aligning for different photos
+[x] Better cropping/aligning for different photos
 [-] Store and display date
 [x] Manage photos on your feed
 [-] Cloudfront or save locally to device
 [-] Video support
 [-] Speech-to-text from video
 [-] Friend list to limit who you can see
+[-] More intuitive upload form
+
+Bugs:
+[-] Some photos are black

@@ -118,7 +118,11 @@ module.exports.resize = async (event, context) => {
 
       const bufferedOutput = await sharp(data.Body)
         .rotate()
-        .resize(1920, 1200)
+        .resize({
+          width: 1920,
+          height: 1200,
+          fit: "contain"
+        })
         .toBuffer()
       
         const destparams = {
