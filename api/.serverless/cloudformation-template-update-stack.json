@@ -177,7 +177,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/framefeed/dev/1610907797306-2021-01-17T18:23:17.306Z/framefeed.zip"
+          "S3Key": "serverless/framefeed/dev/1610909543415-2021-01-17T18:52:23.415Z/framefeed.zip"
         },
         "FunctionName": "framefeed-dev-getUsers",
         "Handler": "functions.getUsers",
@@ -201,14 +201,14 @@
         "GetUsersLogGroup"
       ]
     },
-    "GetUsersLambdaVersionSzURnPbmroCh2xYFkxfJZZD7rJ1wOSKW5FXDMctJIaM": {
+    "GetUsersLambdaVersionvU9q9UX35kW3G9E3TdoPCvBRlt2gUSun1rV9k0dI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetUsersLambdaFunction"
         },
-        "CodeSha256": "WubpQ7qPB5dNhsA9Wzewg0opz50lLASiRF0SJjB/9D8="
+        "CodeSha256": "0JrTFoKhwn2guyA/zzpva9xTu1dnTv1KzQnagXKFDzM="
       }
     },
     "GetFeedLambdaFunction": {
@@ -218,7 +218,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/framefeed/dev/1610907797306-2021-01-17T18:23:17.306Z/framefeed.zip"
+          "S3Key": "serverless/framefeed/dev/1610909543415-2021-01-17T18:52:23.415Z/framefeed.zip"
         },
         "FunctionName": "framefeed-dev-getFeed",
         "Handler": "functions.getFeed",
@@ -242,14 +242,14 @@
         "GetFeedLogGroup"
       ]
     },
-    "GetFeedLambdaVersionBAwaqI7pgblKF8BPKvVOHbFzHFR7xWDpcsYERWkees": {
+    "GetFeedLambdaVersion72P1ouWxc8PxD1SGgJPdipAD4GRy7k0fFqkVAzkIg": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetFeedLambdaFunction"
         },
-        "CodeSha256": "WubpQ7qPB5dNhsA9Wzewg0opz50lLASiRF0SJjB/9D8="
+        "CodeSha256": "0JrTFoKhwn2guyA/zzpva9xTu1dnTv1KzQnagXKFDzM="
       }
     },
     "RemoveItemFromFeedLambdaFunction": {
@@ -259,7 +259,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/framefeed/dev/1610907797306-2021-01-17T18:23:17.306Z/framefeed.zip"
+          "S3Key": "serverless/framefeed/dev/1610909543415-2021-01-17T18:52:23.415Z/framefeed.zip"
         },
         "FunctionName": "framefeed-dev-removeItemFromFeed",
         "Handler": "functions.removeItemFromFeed",
@@ -283,14 +283,14 @@
         "RemoveItemFromFeedLogGroup"
       ]
     },
-    "RemoveItemFromFeedLambdaVersionfZdZbfNzOcwMaqD7K1ndt2NiMiSq6Co1DVXdgvybCKE": {
+    "RemoveItemFromFeedLambdaVersionB7ieUO3B2kgcneqIXkTc9qBKTGyDTVM2BMP2hNIx9hA": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "RemoveItemFromFeedLambdaFunction"
         },
-        "CodeSha256": "WubpQ7qPB5dNhsA9Wzewg0opz50lLASiRF0SJjB/9D8="
+        "CodeSha256": "0JrTFoKhwn2guyA/zzpva9xTu1dnTv1KzQnagXKFDzM="
       }
     },
     "GetUploadUrlLambdaFunction": {
@@ -300,7 +300,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/framefeed/dev/1610907797306-2021-01-17T18:23:17.306Z/framefeed.zip"
+          "S3Key": "serverless/framefeed/dev/1610909543415-2021-01-17T18:52:23.415Z/framefeed.zip"
         },
         "FunctionName": "framefeed-dev-getUploadUrl",
         "Handler": "functions.getUploadUrl",
@@ -324,14 +324,14 @@
         "GetUploadUrlLogGroup"
       ]
     },
-    "GetUploadUrlLambdaVersionk1QjG46F9doCNNCqUhP5JsUy9BtEhFLI57P6dwG7qE": {
+    "GetUploadUrlLambdaVersiontTjN08ofEMSW1H6UqKxCZSNstTZNWWUhvMzdfMe4": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetUploadUrlLambdaFunction"
         },
-        "CodeSha256": "WubpQ7qPB5dNhsA9Wzewg0opz50lLASiRF0SJjB/9D8="
+        "CodeSha256": "0JrTFoKhwn2guyA/zzpva9xTu1dnTv1KzQnagXKFDzM="
       }
     },
     "ResizeLambdaFunction": {
@@ -341,7 +341,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/framefeed/dev/1610907797306-2021-01-17T18:23:17.306Z/framefeed.zip"
+          "S3Key": "serverless/framefeed/dev/1610909543415-2021-01-17T18:52:23.415Z/framefeed.zip"
         },
         "FunctionName": "framefeed-dev-resize",
         "Handler": "functions.resize",
@@ -365,14 +365,14 @@
         "ResizeLogGroup"
       ]
     },
-    "ResizeLambdaVersionRD0hGAAvHI4750Cc5RQz7CtQ0qdJeK2BUnjNwiZO6Oc": {
+    "ResizeLambdaVersionlrbNJxpazYUPk0mPynzMqamuBuAOrxQdLGNRB0J41Y": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ResizeLambdaFunction"
         },
-        "CodeSha256": "WubpQ7qPB5dNhsA9Wzewg0opz50lLASiRF0SJjB/9D8="
+        "CodeSha256": "0JrTFoKhwn2guyA/zzpva9xTu1dnTv1KzQnagXKFDzM="
       }
     },
     "S3BucketFramefeeduploaddev": {
@@ -827,7 +827,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1610907791329": {
+    "ApiGatewayDeployment1610909538554": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -1003,31 +1003,31 @@
     "GetUsersLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetUsersLambdaVersionSzURnPbmroCh2xYFkxfJZZD7rJ1wOSKW5FXDMctJIaM"
+        "Ref": "GetUsersLambdaVersionvU9q9UX35kW3G9E3TdoPCvBRlt2gUSun1rV9k0dI"
       }
     },
     "GetFeedLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetFeedLambdaVersionBAwaqI7pgblKF8BPKvVOHbFzHFR7xWDpcsYERWkees"
+        "Ref": "GetFeedLambdaVersion72P1ouWxc8PxD1SGgJPdipAD4GRy7k0fFqkVAzkIg"
       }
     },
     "RemoveItemFromFeedLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "RemoveItemFromFeedLambdaVersionfZdZbfNzOcwMaqD7K1ndt2NiMiSq6Co1DVXdgvybCKE"
+        "Ref": "RemoveItemFromFeedLambdaVersionB7ieUO3B2kgcneqIXkTc9qBKTGyDTVM2BMP2hNIx9hA"
       }
     },
     "GetUploadUrlLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetUploadUrlLambdaVersionk1QjG46F9doCNNCqUhP5JsUy9BtEhFLI57P6dwG7qE"
+        "Ref": "GetUploadUrlLambdaVersiontTjN08ofEMSW1H6UqKxCZSNstTZNWWUhvMzdfMe4"
       }
     },
     "ResizeLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ResizeLambdaVersionRD0hGAAvHI4750Cc5RQz7CtQ0qdJeK2BUnjNwiZO6Oc"
+        "Ref": "ResizeLambdaVersionlrbNJxpazYUPk0mPynzMqamuBuAOrxQdLGNRB0J41Y"
       }
     },
     "ServiceEndpoint": {

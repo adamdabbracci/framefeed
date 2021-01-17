@@ -114,15 +114,25 @@ module.exports.resize = async (event, context) => {
         Bucket: process.env.UPLOAD_BUCKET,
       }).promise()
       
-      console.log("Got image from S3")
+      const sharpObject = sharp(data.Body)
+      // Setup the resize options 
+      let resizeOptions = {
+        width: 1920,
+        height: 1200,
+      }
 
-      const bufferedOutput = await sharp(data.Body)
+      // Check if we need to resize for portrait images
+      const metadata = await sharpObject.metadata()
+      console.log(`Image size: Height: ${metadata.height} Width: ${metadata.width} Size: ${metadata.size}`)
+      if (metadata.height > metadata.width) {
+        resizeOptions.fit = "inside"
+      }
+
+      console.log(resizeOptions)
+
+      const bufferedOutput = await sharpObject
         .rotate()
-        .resize({
-          width: 1920,
-          height: 1200,
-          fit: "contain"
-        })
+        .resize(resizeOptions)
         .toBuffer()
       
         const destparams = {
